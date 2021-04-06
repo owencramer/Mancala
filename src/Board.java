@@ -85,25 +85,30 @@ public class Board {
      * Output: 0 no side empty, 1 player 1 side empty, 2 player 2 side empty, 2 both sides empty
      */
 
-    public int checkSideEmpty() {
-        int retVal, p1 = 0, p2 = 0;
+    public int checkSideEmptyP1() {
+        int p1 = 0;
         // Checks player 1's for empty pits.
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 6; i++) {
             if (board[i] != 0) {
                 p1 = 0;
                 break;
             } else p1 = 1;
         }
+        return p1;
+    }
+
+    public int checkSideEmptyP2() {
+        int p2 = 0;
         // Checks player 2's for empty pits.
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 11; i++) {
             if (board[i] != 0) {
                 p2 = 0;
                 break;
             } else p2 = 1;
         }
-        retVal = p1 + p2;
-        return retVal;
+        return p2;
     }
+
 
     public int playerMove(Player player) {
         int retVal, index = -1;
@@ -124,13 +129,18 @@ public class Board {
             index = findIndex(letter);
             if (index != -1 && index >= player.getStartPit() && index <= player.getEndPit()
                     && board[index] > 0) loop = false;
+            if (checkSideEmptyP1() > 0) {
+                loop = false;
+                System.out.println("At least one side is empty, the game is now over.");
+                index = -1;
+            }
+            if (checkSideEmptyP2() > 0) {
+                loop = false;
+                System.out.println("At least one side is empty, the game is now over.");
+                index = -1;
+            }
             else {
                 System.out.println("Select a pit on your side that contains stones.");
-                if (checkSideEmpty() > 0) {
-                    loop = false;
-                    System.out.println("At least one side is empty, the game is now over.");
-                    index = -1;
-                }
             }
         } while (loop);
 
