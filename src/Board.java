@@ -88,14 +88,14 @@ public class Board {
     public int checkSideEmpty() {
         int retVal, p1 = 0, p2 = 0;
         // Checks player 1's for empty pits.
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 6; i++) {
             if (board[i] != 0) {
                 p1 = 0;
                 break;
             } else p1 = 1;
         }
         // Checks player 2's for empty pits.
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 11; i++) {
             if (board[i] != 0) {
                 p2 = 0;
                 break;
